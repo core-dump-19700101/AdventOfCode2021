@@ -1,6 +1,6 @@
 count = 0
 prev_depth = -1
-with open('Day1/input') as f:
+with open('day1/input') as f:
     line = f.readline()
     while line:
         depth = int(line)

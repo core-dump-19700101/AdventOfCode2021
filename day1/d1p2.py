@@ -1,6 +1,6 @@
 WINDOW_SIZE = 3
 
-with open('Day1/input') as f:
+with open('day1/input') as f:
     lines = f.readlines()
     i = 0
     prev_sum = -1
