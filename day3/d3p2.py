@@ -20,7 +20,7 @@ def build_bit_trie(lines):
                 node = node.zero
             else:
                 if not node.one:
-                    node.one = BitTrie(int(math.pow(2, depth-i-1)))
+                    node.one = BitTrie(math.pow(2, depth-i-1))
                 node = node.one
     return head
 
@@ -33,11 +33,10 @@ def compute_rating(trie, compare):
         else:
             node = node.zero if compare(node.zero.count, node.one.count) else node.one
         rating += node.val
-    return rating
+    return int(rating)
 
 with open('day3/input') as f:
-    lines = f.readlines()
-    bitwise_trie = build_bit_trie(lines)
+    bitwise_trie = build_bit_trie(f.readlines())
     o2 = compute_rating(bitwise_trie, lambda a,b: a>b)
     co2 = compute_rating(bitwise_trie, lambda a,b: a<=b)
     print("o2=%d, co2=%d, o2*co2=%d" % (o2, co2, o2 * co2))
