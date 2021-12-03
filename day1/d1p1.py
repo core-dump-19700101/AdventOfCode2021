@@ -9,4 +9,4 @@ with open('day1/input') as f:
         prev_depth = depth
         line = f.readline()
 
-print("Increased " + str(count) + " times")
+print(count)

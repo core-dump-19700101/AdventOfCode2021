@@ -1,5 +1,3 @@
-import math
-
 def build_bit_frequency(lines):
     dict = {}
     for line in lines:
@@ -14,7 +12,7 @@ def calc_gamma_epsilon(frequency):
     epsilon = 0
     digits = len(frequency)
     for k, v in frequency.items():
-        val = int(math.pow(2, digits - k - 1))
+        val = 2**(digits-k-1)
         if v[0] > v[1]:
             epsilon += val
         else:
