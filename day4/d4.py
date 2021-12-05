@@ -16,41 +16,29 @@ class BingoBoard:
                 line.add(nums[i+j*dimension])
             self.lines.append(line)
 
+        self.score = 0
+
     def check(self, num):
         if num not in self.nums:
-            return 0
+            return False
         self.nums.remove(num)
         for line in self.lines:
             line.discard(num)
             if len(line) == 0:
-                return sum([int(n) for n in self.nums])*int(num)
-        return 0
+                self.score = sum([int(n) for n in self.nums])*int(num)
+                return True
+        return False
 
-    def __str__(self):
-        return str(self.nums)
-
-    def __repr__(self):
-        return str(self)
-
-def check_boards(boards, num):
-    for board in boards:
-        result = board.check(num)
-        if result:
-            return result
-    return 0
-
-def last_board(boards, num):
+def get_winners(boards, num):
     won = []
     for board in boards:
         result = board.check(num)
         if result:
-            if len(boards) == 1:
-                return result
             won.append(board)
     if len(won) > 0:
         for board in won:
             boards.remove(board)
-    return 0
+    return won
 
 called_nums = []
 boards = []
@@ -64,8 +52,9 @@ with open('day4/input_test') as f:
             boards.append(BingoBoard(nums))
             nums = []
 
+    winners = []
     for num in called_nums:
-        result = last_board(boards, num) # check_boards for part 1
-        if result:
-            print(result)
-            break
+        winners.extend(get_winners(boards, num))
+
+    print(winners[0].score)
+    print(winners[-1].score)
