@@ -1,18 +1,13 @@
-from src.solution import d1p1, d1p2, d2p1, d2p2, d3p1, d3p2, d4
 from src.util import input_helper
-import re
+from re import match
 from os import listdir
 
 class Solution:
-    def __init__(self, filename, module=None):
-        m = re.match(r'd(\d+)(?:p(\d+))?', filename)
+    def __init__(self, filename, module):
+        m = match(r'd(\d+)(?:p(\d+))?', filename)
         self.day = m.group(1)
         self.part = m.group(2) if m.group(2) else 0
-        self.module = module
-    def solve(self, input):
-        if not self.module:
-            raise Exception('No solution found for ' + str(self))
-        return self.module.solve(input)
+        self.solve = module.solve    
     def run(self, input):
         if self.part:
             print('%s: %d' % (str(self), self.solve(input)))
