@@ -17,10 +17,7 @@ def build_fish_dict(fish):
 def get_spawns(days, duration):
     if days >= duration:
         return []
-    spawns = []
-    for i in range(0, (duration - days - 1) // CYCLE + 1):
-        spawns.append(days+1 + CYCLE*i + INITIAL)
-    return spawns
+    return [days+1 + CYCLE*i + INITIAL for i in range(0, (duration-days-1) // CYCLE + 1)]
 
 def calc_population(fish_dict, duration):
     cache = {}
