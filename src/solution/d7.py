@@ -23,8 +23,6 @@ def find_min_position(positions, linear=True):
     for p in get_target_positions(positions, linear):
         if p not in cache:
             cache[p] = calc_fuel_cost(p, positions, linear)
-        if min_p == None:
-            min_p = (p, cache[p])
-        elif min_p[1] > cache[p]:
+        if min_p == None or min_p[1] > cache[p]:
             min_p = (p, cache[p])
     return min_p[1]
